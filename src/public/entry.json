@@ -1,0 +1,8 @@
+{
+    "name":"tuition",
+    "type": "Expense",
+    "category": "categories.category[0]",
+    "amount": 12345,
+    "date": "10/24/2025",
+    "month": "October"
+}   
