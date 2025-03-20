@@ -1,5 +1,6 @@
 <script>
   import InputForm from './lib/InputForm.svelte';
+  import TransactionTable from './lib/TransactionTable.svelte';
 </script>
 
 <header id="header">
@@ -12,7 +13,9 @@
     <h1>Personal Finance Tracker</h1>
   </div>
   <div class="main"></div>
-  <div class="listings"></div>
+  <div class="listings">
+    <TransactionTable />
+  </div>
 
   <div id="inputForm">
     <InputForm />
