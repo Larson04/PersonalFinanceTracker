@@ -11,7 +11,7 @@
 
         console.log(description, category, income_expense, amount, date, month)
 
-        document.getElementsByTagName('form').reset()
+        document.getElementsByTagName('form')[0].reset()
     }
 
 </script>
