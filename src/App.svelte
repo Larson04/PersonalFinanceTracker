@@ -1,5 +1,6 @@
 <script>
   import InputForm from './lib/InputForm.svelte';
+  import TransactionTable from './lib/TransactionTable.svelte';
   import Hero from './lib/Hero.svelte';
 </script>
 
@@ -13,7 +14,9 @@
     <Hero />
   </div>
   <div class="main"></div>
-  <div class="listings"></div>
+  <div class="listings">
+    <TransactionTable />
+  </div>
 
   <div id="inputForm">
     <InputForm />
