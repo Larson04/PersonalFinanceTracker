@@ -1,6 +1,7 @@
 <script>
   import InputForm from './lib/InputForm.svelte';
   import TransactionTable from './lib/TransactionTable.svelte';
+  import Hero from './lib/Hero.svelte';
 </script>
 
 <header id="header">
@@ -10,7 +11,7 @@
 <main>
   
   <div class="hero">
-    <h1>Personal Finance Tracker</h1>
+    <Hero />
   </div>
   <div class="main"></div>
   <div class="listings">
@@ -26,5 +27,5 @@
 <footer id="footer"></footer>
 
 <style>
-
+  
 </style>
