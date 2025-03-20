@@ -13,7 +13,7 @@ export function getLocalStorage(key) {
     }
     return []; // Return empty array if nothing is in localStorage
 }
- 
+
 // save data to local storage
 export function setLocalStorage(key, data) {
 localStorage.setItem(key, JSON.stringify(data));

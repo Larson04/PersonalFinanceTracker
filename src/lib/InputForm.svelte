@@ -1,4 +1,6 @@
 <script>
+
+    import { getLocalStorage, setLocalStorage } from "../js/utils";
     let description
     let category
     let income_expense
@@ -6,19 +8,46 @@
     let date
     let month
 
-    function loginHandler(e) {
+    function submitHandler(e) {
         e.preventDefault()
 
-        console.log(description, category, income_expense, amount, date, month)
+        // Create an object to store the new transaction
+        let transactionObject = {
+            "description": description, 
+            "category": category,
+            "income_expense": income_expense,
+            "amount": amount,
+            "date": date,
+            "month": month
+        }
 
+        // The "KEY" may vary depending on the form's input
+        let key = (income_expense === "income") ? "income" : "expense"
+
+        debugger
+        // Retrieve evertything that we have currently stored
+        let transactions = getLocalStorage(key);
+
+        // We are expecting the LocalStorage variable to look like so:
+        // {"expenses": [ {"description": description, "category": category, ...},{...} ]}
+
+        // Add new transaction
+        transactions.push(transactionObject);
+        
+        // Send updated list to Local Storage
+        setLocalStorage(key, transactions)
+        
+        // Reset the form 
         document.getElementsByTagName('form')[0].reset()
     }
+
+
 
 </script>
 
 <div class="container">
     <h2>Income/Expense Tracker</h2>
-    <form onsubmit={loginHandler}>
+    <form onsubmit={submitHandler}>
         <div class="form-group">
             <label for="description">Description:</label>
             <input type="text" id="description" name="description" bind:value={description} required>
