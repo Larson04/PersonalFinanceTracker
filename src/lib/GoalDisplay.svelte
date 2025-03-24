@@ -24,21 +24,20 @@ let scholarshipMatrix = [
 function getPercentages(){
   let row = 6
   let col = 5
-  
   return scholarshipMatrix[row][col]
 }
 
 function setCSSAnimation(meritPercentage, rmPercentage){
   
-  const styleSheet = document.styleSheets[0]; 
+  const styleSheet = document.styleSheets[1]; 
 
-//   // Remove any existing keyframes rule with the same name
-//   for (let i = 0; i < styleSheet.cssRules.length; i++) {
-//     if (styleSheet.cssRules[i].name === 'progress') {
-//       styleSheet.deleteRule(i);
-//       break;
-//     }
-//   }
+  // // Remove any existing keyframes rule with the same name
+  // for (let i = 0; i < styleSheet.cssRules.length; i++) {
+  //   if (styleSheet.cssRules[i].name === 'progress') {
+  //     styleSheet.deleteRule(i);
+  //     break;
+  //   }
+  // }
 
   // Create the new keyframes rule
   const keyframesRule = `
@@ -111,7 +110,7 @@ const resultsContainer = document.querySelector(".resultsContainer")
 const calculator = document.querySelector(".calculator")
 
 
-calculateScholarship()
+setTimeout(calculateScholarship,3000)
 
 
 
@@ -167,18 +166,18 @@ calculateScholarship()
   inherits: true;
   initial-value: 0%;
 }
-/* 
+
 @keyframes progress {
   from {
     --merit: 0%;
-    --RM: 0%
+    --RM: 50%
   }
 
   to {
-    --merit: 0%;
-    --RM: 0%
+    --merit: 50%;
+    --RM: 75%
   }
-} */
+}
 
 .circle {
   --merit: 0%;
