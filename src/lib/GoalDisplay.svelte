@@ -3,6 +3,27 @@
 function getPercentages(){
   return 30
 }
+function getAllGoalsStart(goals){
+
+  let progress = ''
+
+  goals.forEach((key) => {
+
+    progress += `\n --${key}: 0}%;`
+  })
+  return progress
+}
+
+function getAllGoalsEnd(goals){
+
+  let progress = ''
+
+  Object.entries(goals).forEach(([key, value]) => {
+
+    progress += `\n --${key}: ${value}%;`
+  })
+  return progress
+}
 
 function setCSSAnimation(goalPercentages){
   
@@ -12,13 +33,10 @@ function setCSSAnimation(goalPercentages){
   const keyframesRule = `
     @keyframes progress {
       from {
-        --merit: 0%;
-        --RM: 0%;
+        ${getAllGoalsStart(goalPercentages)}
       }
       to {
-        ${goalPercentages}
-        --merit: ${meritPercentage}%;
-        --RM: ${meritPercentage + rmPercentage}%;
+        ${getAllGoalsEnd(goalPercentages)}
       }
     }
   `;
@@ -27,6 +45,8 @@ function setCSSAnimation(goalPercentages){
   styleSheet.insertRule(keyframesRule, styleSheet.cssRules.length);
 
 }
+
+
 
 function resetAnimation(element) {
   element.style.animation = 'none'; 
@@ -75,7 +95,7 @@ function calculateScholarship(){
 }
 
 
-setTimeout(calculateScholarship,3000)
+setTimeout(calculateScholarship,1000)
 
 
 
