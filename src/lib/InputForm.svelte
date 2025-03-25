@@ -24,7 +24,6 @@
         // The "KEY" may vary depending on the form's input
         let key = (income_expense === "income") ? "income" : "expense"
 
-        debugger
         // Retrieve evertything that we have currently stored
         let transactions = getLocalStorage(key);
 

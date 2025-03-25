@@ -1,14 +1,10 @@
 <script>
-    import { getLocalStorage } from '../js/utils.js';
-
-    let date = '03/24/2023'
-    let description = 'Required textbooks'
-    let category = 'School'
-    let amount = '200.00'
-
-    const data = getLocalStorage('expense')
-    console.log(data)
-
+    let { entry } = $props()
+    
+    let date = entry.date
+    let description = entry.description
+    let category = entry.category
+    let amount = entry.amount
 
 </script>
 
@@ -18,9 +14,10 @@
     <td>{category}</td>
     <td>${amount}</td>
 </tr>
-<tr>
-    <td>{date}</td>
-    <td>{description}</td>
-    <td>{category}</td>
-    <td>${amount}</td>
-</tr>
+
+<style>
+    tr{
+        padding: 0px 0px 0px 4px;
+    }
+
+</style>
