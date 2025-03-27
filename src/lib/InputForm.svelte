@@ -24,7 +24,6 @@
         // The "KEY" may vary depending on the form's input
         let key = (income_expense === "income") ? "income" : "expense"
 
-        debugger
         // Retrieve evertything that we have currently stored
         let transactions = getLocalStorage(key);
 
@@ -61,8 +60,8 @@
         <div class="form-group">
             <label for="income_expense">Income or Expense:</label>
             <select id="income_expense" name="income_expense" bind:value={income_expense} required>
-                <option value="Income">Income</option>
-                <option value="Expense">Expense</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
             </select>
         </div>
 
@@ -86,12 +85,7 @@
 </div>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 20px;
-    }
+
     .container {
         max-width: 600px;
         margin: auto;
