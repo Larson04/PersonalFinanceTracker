@@ -5,9 +5,9 @@
 
     let progress = ''
 
-    goals.forEach((key) => {
+    Object.keys(goals).forEach((key) => {
 
-      progress += `\n --${key}: 0}%;`
+      progress += `\n --${key}: 0%;`
     })
     return progress
   }
@@ -60,9 +60,10 @@
 
     let percentages = {} 
 
-    const monthlyBudget = goals[0]['allowedExpense'] const budgetPercentage = 100
+    const monthlyBudget = goals[0]['allowedExpense'] 
+    const budgetPercentage = 100
     
-    Object.entries(goals).forEach((item) => {
+    goals.forEach((item) => {
       
       let goalPercentage = (item['currentExpense'] * budgetPercentage ) / monthlyBudget
 
@@ -77,7 +78,6 @@
 
   function calculateGoals(){
 
-    debugger
     let goals = getLocalStorage('goals')
     
     let goalPercentages = getTotalPercentages(goals)
@@ -86,12 +86,10 @@
 
     const circle = document.querySelector('.circle');
     if (circle) {
-      // @ts-ignore
-      circle.style.setProperty('--tuition', `${meritPercentage}%`);
-      // @ts-ignore
-      circle.style.setProperty('--merit', `${meritPercentage}%`);
-      // @ts-ignore
-      circle.style.setProperty('--RM', `${rmPercentage}%`);
+
+      Object.entries(goalPercentages).forEach(([key, value]) => {
+        circle.style.setProperty(`--${key}`, `${value}%`);
+      });
 
       // circle.computedStyleMap.setProperty('background')
       // @ts-ignore
