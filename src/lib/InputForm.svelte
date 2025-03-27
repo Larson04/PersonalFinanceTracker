@@ -60,8 +60,8 @@
         <div class="form-group">
             <label for="income_expense">Income or Expense:</label>
             <select id="income_expense" name="income_expense" bind:value={income_expense} required>
-                <option value="Income">Income</option>
-                <option value="Expense">Expense</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
             </select>
         </div>
 

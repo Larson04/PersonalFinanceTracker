@@ -1,113 +1,145 @@
 <script>
+  import { getLocalStorage } from "../js/utils";
 
-function getPercentages(){
-  return 30
-}
-function getAllGoalsStart(goals){
+  function getAllGoalsStart(goals){
 
-  let progress = ''
+    let progress = ''
 
-  goals.forEach((key) => {
+    goals.forEach((key) => {
 
-    progress += `\n --${key}: 0}%;`
-  })
-  return progress
-}
-
-function getAllGoalsEnd(goals){
-
-  let progress = ''
-
-  Object.entries(goals).forEach(([key, value]) => {
-
-    progress += `\n --${key}: ${value}%;`
-  })
-  return progress
-}
-
-function setCSSAnimation(goalPercentages){
-  
-  const styleSheet = document.styleSheets[1]; 
-
-  // Create the new keyframes rule
-  const keyframesRule = `
-    @keyframes progress {
-      from {
-        ${getAllGoalsStart(goalPercentages)}
-      }
-      to {
-        ${getAllGoalsEnd(goalPercentages)}
-      }
-    }
-  `;
-
-  // Inject the new keyframes rule
-  styleSheet.insertRule(keyframesRule, styleSheet.cssRules.length);
-
-}
-
-
-
-function resetAnimation(element) {
-  element.style.animation = 'none'; 
-  element.offsetHeight; 
-  element.style.setProperty('--tuition', '0%');
-  element.style.setProperty('--merit', '0%');
-  element.style.setProperty('--RM', '0%');
-
-
-}
-
-
-function calculateScholarship(){
-  
-  let goalPercentages = {}
-
-
-  const tuition = 2400 
-  const tuitionPercentage = 100
-  const meritPercentage = getPercentages()
-  goalPercentages['merit'] = meritPercentage
-  const merit =  (meritPercentage * tuition)/tuitionPercentage
-  const rMissionary = 1000 
-  const rmPercentage = (rMissionary * tuitionPercentage)/tuition  
-  goalPercentages['RM'] = rmPercentage
-  
-  
-
-
-  const circle = document.querySelector('.circle');
-  if (circle) {
-    // @ts-ignore
-    circle.style.setProperty('--tuition', `${meritPercentage}%`);
-    // @ts-ignore
-    circle.style.setProperty('--merit', `${meritPercentage}%`);
-    // @ts-ignore
-    circle.style.setProperty('--RM', `${rmPercentage}%`);
-
-    // circle.computedStyleMap.setProperty('backgroun')
-    // @ts-ignore
-    circle.style.animation = ''; 
+      progress += `\n --${key}: 0}%;`
+    })
+    return progress
   }
-  setCSSAnimation(goalPercentages)
+
+  function getAllGoalsEnd(goals){
+
+    let progress = ''
+
+    Object.entries(goals).forEach(([key, value]) => {
+
+      progress += `\n --${key}: ${value}%;`
+    })
+    return progress
+  }
+
+  function setCSSAnimation(goalPercentages){
+    
+    const styleSheet = document.styleSheets[1]; 
+
+    // Create the new keyframes rule
+    const keyframesRule = `
+      @keyframes progress {
+        from {
+          ${getAllGoalsStart(goalPercentages)}
+        }
+        to {
+          ${getAllGoalsEnd(goalPercentages)}
+        }
+      }
+    `;
+
+    // Inject the new keyframes rule
+    styleSheet.insertRule(keyframesRule, styleSheet.cssRules.length);
+
+  }
 
 
-}
+
+  function resetAnimation(element) {
+    element.style.animation = 'none'; 
+    element.offsetHeight; 
+    element.style.setProperty('--tuition', '0%');
+    element.style.setProperty('--merit', '0%');
+    element.style.setProperty('--RM', '0%');
 
 
-setTimeout(calculateScholarship,1000)
+  }
+
+  function getTotalPercentages(goals){
+
+    let percentages = {} 
+
+    const monthlyBudget = goals[0]['allowedExpense'] const budgetPercentage = 100
+    
+    Object.entries(goals).forEach((item) => {
+      
+      let goalPercentage = (item['currentExpense'] * budgetPercentage ) / monthlyBudget
+
+      percentages[item['category']] = goalPercentage
+
+    })
+    
+    percentages['monthlyBudget'] = budgetPercentage
+
+    return percentages
+  }
+
+  function calculateGoals(){
+
+    debugger
+    let goals = getLocalStorage('goals')
+    
+    let goalPercentages = getTotalPercentages(goals)
+
+    console.log(goalPercentages)
+
+    const circle = document.querySelector('.circle');
+    if (circle) {
+      // @ts-ignore
+      circle.style.setProperty('--tuition', `${meritPercentage}%`);
+      // @ts-ignore
+      circle.style.setProperty('--merit', `${meritPercentage}%`);
+      // @ts-ignore
+      circle.style.setProperty('--RM', `${rmPercentage}%`);
+
+      // circle.computedStyleMap.setProperty('background')
+      // @ts-ignore
+      circle.style.animation = ''; 
+    }
+    setCSSAnimation(goalPercentages)
+
+
+  }
+
+
+  setTimeout(calculateGoals,1000)
 
 
 
 
 
-// document.querySelector('#startOver').addEventListener("click", ()=>{
+  // document.querySelector('#startOver').addEventListener("click", ()=>{
 
-//   resetAnimation(document.querySelector('.circle'))
+  //   resetAnimation(document.querySelector('.circle'))
 
-// })
+  // })
 
-
+  // this is the assumed structure of the goals inside of Local storage  
+  // MONTHLY BUDGET SHOULD ALWAYS BE THE FIRST ONE
+  // [
+  //   {
+  //   'category': 'monthlyBudget', 
+  //   'allowedExpense': 2000,
+  //   'currentExpense': 450
+  //  },
+  //  {
+  //   'category': 'groceries', 
+  //   'allowedExpense': 200,
+  //   'currentExpense': 150
+  //  },
+  //  {
+  //   'category': 'school', 
+  //   'allowedExpense': 300,
+  //   'currentExpense': 150
+  //  },
+  //  {
+  //   'category': 'bills', 
+  //   'allowedExpense': 500,
+  //   'currentExpense': 150
+  //  },
+  //   {...}
+  // ]
 
 
 </script>
