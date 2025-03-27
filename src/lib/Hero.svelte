@@ -22,11 +22,12 @@
 }
 .hero-welcome h1 {
     font-size: 32px;
-    color: black;
+    color: white;
     font-family: inherit;
-    background-color: rgba(255, 255, 255, 0.2);
-    padding: 4px 16px;
-    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 16px 0px;
+    width: 100vw;
+    text-align: center;
 }
 
 </style>

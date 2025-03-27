@@ -39,7 +39,10 @@
 </div>
 
 <style>
-    
+    h2 {
+        text-align: center;
+    }
+
     .container {
         border: 2px solid #2C3E50;
         border-radius: 16px;
@@ -48,6 +51,7 @@
         align-items: center;
         max-width: 65%;
         padding: 4px 0px 8px 0px;
+        margin: auto;
     }
     
     table {

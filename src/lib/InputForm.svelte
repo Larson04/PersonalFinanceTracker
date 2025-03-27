@@ -128,4 +128,7 @@
     button:hover {
         background-color: #45a049;
     }
+    button:active {
+        scale: 90%;
+    }
 </style>
