@@ -1,147 +1,83 @@
 <script>
-  import { getLocalStorage } from "../js/utils";
 
-  function getAllGoalsStart(goals){
 
-    let progress = ''
 
-    goals.forEach((key) => {
 
-      progress += `\n --${key}: 0}%;`
-    })
-    return progress
-  }
+  function setCSSAnimation(goal) {
+    const styleSheet = document.styleSheets[1];
 
-  function getAllGoalsEnd(goals){
-
-    let progress = ''
-
-    Object.entries(goals).forEach(([key, value]) => {
-
-      progress += `\n --${key}: ${value}%;`
-    })
-    return progress
-  }
-
-  function setCSSAnimation(goalPercentages){
-    
-    const styleSheet = document.styleSheets[1]; 
-
-    // Create the new keyframes rule
+    // Create the new keyframes rule dynamically
     const keyframesRule = `
       @keyframes progress {
         from {
-          ${getAllGoalsStart(goalPercentages)}
+          --goal: 0%;
         }
         to {
-          ${getAllGoalsEnd(goalPercentages)}
+          --goal: ${goal}%;
         }
       }
     `;
-
+    
     // Inject the new keyframes rule
     styleSheet.insertRule(keyframesRule, styleSheet.cssRules.length);
-
   }
 
-
-
-  function resetAnimation(element) {
-    element.style.animation = 'none'; 
-    element.offsetHeight; 
-    element.style.setProperty('--tuition', '0%');
-    element.style.setProperty('--merit', '0%');
-    element.style.setProperty('--RM', '0%');
-
-
+  function getTotalPercentage(goal) {
+    const monthlyBudget = goal['allowedExpense'];
+    const budgetPercentage = 100;
+    
+    let expensePercentage = (goal['currentExpense'] * budgetPercentage) / monthlyBudget;
+    return expensePercentage;
   }
 
-  function getTotalPercentages(goals){
+  function calculateGoals() {
+    // let goals = getLocalStorage('goals');
+    let goal = {"category": "monthlyBudget", "allowedExpense": 2000, "currentExpense": 450}
+    let goalPercentage = getTotalPercentage(goal);
 
-    let percentages = {} 
-
-    const monthlyBudget = goals[0]['allowedExpense'] 
-    const budgetPercentage = 100
-    
-    Object.entries(goals).forEach((item) => {
-      
-      let goalPercentage = (item['currentExpense'] * budgetPercentage ) / monthlyBudget
-
-      percentages[item['category']] = goalPercentage
-
-    })
-    
-    percentages['monthlyBudget'] = budgetPercentage
-
-    return percentages
-  }
-
-  function calculateGoals(){
-
-    debugger
-    let goals = getLocalStorage('goals')
-    
-    let goalPercentages = getTotalPercentages(goals)
-
-    console.log(goalPercentages)
+    console.log(goalPercentage);
 
     const circle = document.querySelector('.circle');
     if (circle) {
-      // @ts-ignore
-      circle.style.setProperty('--tuition', `${meritPercentage}%`);
-      // @ts-ignore
-      circle.style.setProperty('--merit', `${meritPercentage}%`);
-      // @ts-ignore
-      circle.style.setProperty('--RM', `${rmPercentage}%`);
+      // 1. Create and inject the keyframes rule before applying animation
+      setCSSAnimation(goalPercentage);
 
-      // circle.computedStyleMap.setProperty('background')
-      // @ts-ignore
-      circle.style.animation = ''; 
+      // 2. Set an initial "empty" gradient (everything at 0%)
+      let initialGradient = '';
+      Object.entries(goalPercentage).forEach(([key, value], index) => {
+        if (key !== 'monthlyBudget') {
+          initialGradient += `lightgray 0% 0%, `;
+        }
+      });
+
+      circle.style.background = `conic-gradient(at center, ${initialGradient.slice(0, -2)})`;
+
+      // 3. Delay applying the animated gradient to allow the keyframes to take effect
+      setTimeout(() => {
+        let newGradient = '';
+        let startAngle = 0;
+
+        Object.entries(goalPercentage).forEach(([key, value], index) => {
+          if (key !== 'monthlyBudget') {
+            let endAngle = startAngle + value;
+            newGradient += `${getColorForGoal(index)} ${startAngle}% ${endAngle}%, `;
+            startAngle = endAngle;
+          }
+        });
+
+        // 4. Apply the final conic-gradient and start the animation
+        circle.style.background = `conic-gradient(at center, ${newGradient.slice(0, -2)})`;
+        circle.style.animation = 'progress 2s linear 1 forwards';
+      }, 100); // Short delay allows animation to start smoothly
     }
-    setCSSAnimation(goalPercentages)
-
-
   }
 
+  function getColorForGoal(index) {
+    const colors = ['red', 'blue', 'green', 'yellow', 'orange']; // Colors for goals
+    return colors[index % colors.length]; // Cycle through colors
+  }
 
-  setTimeout(calculateGoals,1000)
-
-
-
-
-
-  // document.querySelector('#startOver').addEventListener("click", ()=>{
-
-  //   resetAnimation(document.querySelector('.circle'))
-
-  // })
-
-  // this is the assumed structure of the goals inside of Local storage  
-  // MONTHLY BUDGET SHOULD ALWAYS BE THE FIRST ONE
-  // [
-  //   {
-  //   'category': 'monthlyBudget', 
-  //   'allowedExpense': 2000,
-  //   'currentExpense': 450
-  //  },
-  //  {
-  //   'category': 'groceries', 
-  //   'allowedExpense': 200,
-  //   'currentExpense': 150
-  //  },
-  //  {
-  //   'category': 'school', 
-  //   'allowedExpense': 300,
-  //   'currentExpense': 150
-  //  },
-  //  {
-  //   'category': 'bills', 
-  //   'allowedExpense': 500,
-  //   'currentExpense': 150
-  //  },
-  //   {...}
-  // ]
-
+  setTimeout(calculateGoals, 300);
 
 </script>
 
@@ -156,17 +92,12 @@
 
 <style>
 
-@property --merit {
+@property --goal {
   syntax: "<percentage>";
   inherits: true;
   initial-value: 0%;
 }
 
-@property --RM {
-  syntax: "<percentage>";
-  inherits: true;
-  initial-value: 0%;
-}
 
 /* @keyframes progress {
   from {
@@ -181,17 +112,15 @@
 } */
 
 .circle {
-  --merit: 0%;
-  --RM: 0%;
- 
+  --goal: 0%; 
   background: conic-gradient(
     at center,
-    red var(--merit),
-    calc(var(--merit)),
-    blue calc(var(--RM)),
-    calc(var(--RM)),
-    rgb(220, 217, 217) calc(var(--merit))
+    rgb(57, 174, 57) var(--goal),
+    calc(var(--goal)),
+    red calc(var(--goal)),
+    rgb(220, 217, 217)calc(var(--goal))
   );
+  /* background: conic-gradient(at center, #dcd9d9 0deg); Placeholder */
   animation: progress 2s linear 1 forwards;
   border-radius: 50%;
   mask: radial-gradient(circle at center, transparent 55%, black 55%);

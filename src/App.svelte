@@ -21,6 +21,9 @@
     <Hero />
   </div>
   <div class="main"></div>
+  <div>
+    <GoalDisplay />
+  </div>
   <div class="listings">
     <h2>History</h2>
     <div class="income">
@@ -33,9 +36,6 @@
         <TransactionTable month={month} income_expense={'expense'} />
         {/each}
     </div>
-  </div>
-  <div>
-    <GoalDisplay />
   </div>
 
   <div id="inputForm">
