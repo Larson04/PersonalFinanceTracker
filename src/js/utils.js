@@ -18,3 +18,22 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
 localStorage.setItem(key, JSON.stringify(data));
 }
+
+
+export function updateCatergoryList(category) {
+
+  let categoriesList = getLocalStorage('categories')
+  
+  // Verify that the list exists in local storage
+  if (categoriesList == null){
+
+    categoriesList = [category]
+
+  } // Check if the category is already on the list 
+  else if (!categoriesList.includes(category)){
+
+    categoriesList.push(category);
+  }
+  
+  setLocalStorage('categories', categoriesList)
+}

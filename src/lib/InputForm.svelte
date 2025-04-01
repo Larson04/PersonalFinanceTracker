@@ -1,6 +1,6 @@
 <script>
 
-    import { getLocalStorage, setLocalStorage } from "../js/utils";
+    import { getLocalStorage, setLocalStorage, updateCatergoryList } from "../js/utils";
     let description
     let category
     let income_expense
@@ -35,6 +35,9 @@
         
         // Send updated list to Local Storage
         setLocalStorage(key, transactions)
+
+        // Update the categories list
+        updateCatergoryList(category.toLowerCase())
         
         // Reset the form 
         document.getElementsByTagName('form')[0].reset()

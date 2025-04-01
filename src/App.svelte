@@ -4,6 +4,7 @@
   import Hero from './lib/Hero.svelte';
   import GoalDisplay from './lib/GoalDisplay.svelte';
   import { getLocalStorage } from './js/utils.js';
+  import GoalList from './lib/GoalList.svelte';
 
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 
   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -22,7 +23,7 @@
   </div>
   <div class="main"></div>
   <div>
-    <GoalDisplay />
+    <GoalList />
   </div>
   <div class="listings">
     <h2>History</h2>
