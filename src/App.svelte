@@ -21,8 +21,8 @@
     <Hero />
   </div>
   <div class="main"></div>
-  <h2>History</h2>
   <div class="listings">
+    <h2>History</h2>
     <div class="income">
       {#each  months as month}
         <TransactionTable month={month} income_expense={'income'} />
