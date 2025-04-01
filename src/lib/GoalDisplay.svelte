@@ -60,7 +60,8 @@
 
     let percentages = {} 
 
-    const monthlyBudget = goals[0]['allowedExpense'] const budgetPercentage = 100
+    const monthlyBudget = goals[0]['allowedExpense'] 
+    const budgetPercentage = 100
     
     Object.entries(goals).forEach((item) => {
       
