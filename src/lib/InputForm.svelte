@@ -14,11 +14,11 @@
         // Create an object to store the new transaction
         let transactionObject = {
             "description": description, 
-            "category": category,
+            "category": category.toLowerCase(),
             "income_expense": income_expense,
             "amount": amount,
             "date": date,
-            "month": month
+            "month": month.toLowerCase()
         }
 
         // The "KEY" may vary depending on the form's input
