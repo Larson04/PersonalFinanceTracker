@@ -43,6 +43,8 @@
         align-items: center;
         max-width: 65%;
         padding: 4px 0px 8px 0px;
+        margin: auto;
+        margin-top: 8px;
     }
     
     table {
