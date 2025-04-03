@@ -4,6 +4,12 @@
 
 <style>
     .copyright {
-        height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 160px;
+        text-align: center;
+        margin-top: 80px;
+        background: #dcf9ff;
     }
 </style>
