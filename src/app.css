@@ -14,8 +14,9 @@ body {
 
 }
 
-.income, .expense{
+.income, .expense {
   width: 50%;
+}
 
 #header {
   display: flex;
