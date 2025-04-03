@@ -12,7 +12,6 @@
 </script>
 
 <header id="header">
-  <div class="navigation"></div>
 </header>
 
 <main>

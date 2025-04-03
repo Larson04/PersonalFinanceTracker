@@ -34,7 +34,10 @@
 </div>
 
 <style>
-    
+    h2 {
+        text-align: center;
+    }
+
     .container {
         border: 2px solid #2C3E50;
         border-radius: 16px;
@@ -45,6 +48,7 @@
         padding: 4px 0px 8px 0px;
         margin: auto;
         margin-top: 8px;
+
     }
     
     table {
