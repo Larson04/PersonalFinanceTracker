@@ -31,6 +31,7 @@
         // {"expenses": [ {"description": description, "category": category, ...},{...} ]}
 
         // Add new transaction
+        // @ts-ignore
         transactions.push(transactionObject);
         
         // Send updated list to Local Storage
