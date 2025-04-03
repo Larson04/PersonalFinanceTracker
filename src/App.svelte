@@ -5,7 +5,7 @@
   import GoalDisplay from './lib/GoalDisplay.svelte';
   import { getLocalStorage } from './js/utils.js';
   import GoalList from './lib/GoalList.svelte';
-
+  
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 
   'July', 'August', 'September', 'October', 'November', 'December'];
   

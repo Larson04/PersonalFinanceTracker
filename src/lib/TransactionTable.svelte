@@ -14,15 +14,6 @@
     let sortedEntries = [...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
     let filteredEntries = sortedEntries.filter(entry => entry.month === month.toLowerCase());
 
-
-    // if (dropDownOption === "All") {
-    //     displayEntries = filteredEntries;
-    // }
-    // else {
-    //     category = dropDownOption;
-    //     displayEntries = filteredEntries.filter(entry => entry.category === category);
-    // }
-
     displayEntries = filteredEntries;
 
 </script>

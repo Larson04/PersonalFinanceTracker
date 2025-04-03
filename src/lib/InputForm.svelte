@@ -1,6 +1,7 @@
 <script>
 
     import { getLocalStorage, setLocalStorage, updateCatergoryList } from "../js/utils";
+    import { closeModal } from "../js/modal.mjs";
     let description
     let category
     let income_expense
@@ -9,7 +10,7 @@
     let month
 
     function submitHandler(e) {
-        e.preventDefault()
+        // e.preventDefault();
 
         // Create an object to store the new transaction
         let transactionObject = {
@@ -47,7 +48,7 @@
 
 </script>
 
-<div class="container">
+<div class="container show">
     <h2>Income/Expense Tracker</h2>
     <form onsubmit={submitHandler}>
         <div class="form-group">
@@ -83,7 +84,7 @@
             <input type="text" id="month" name="month" bind:value={month} required>
         </div>
 
-        <button type="submit">Submit</button>
+        <button id="submit-button" type="submit" onclick={closeModal}>Submit</button>
     </form>
 </div>
 

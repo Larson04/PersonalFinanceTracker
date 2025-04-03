@@ -1,11 +1,15 @@
+<script>
+    import { openModal } from '../js/modal.mjs';
 
+    
+</script>
 
 <div class="logo">
     <img src="src/assets/pft-icon.png" alt="personal finance tracker logo">
 </div>
 
 <div class="buttons">
-    <button id="entry-button">New Entry</button>
+    <button id="entry-button" onclick={openModal}>New Entry</button>
     <button>Import</button>
     <button>Export</button>
 </div>
