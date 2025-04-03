@@ -24,8 +24,8 @@
     font-size: 32px;
     color: white;
     font-family: inherit;
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 16px 0px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 110px 0px;
     width: 100vw;
     text-align: center;
 }

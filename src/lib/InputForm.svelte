@@ -91,7 +91,7 @@
 
     .container {
         max-width: 600px;
-        margin: auto;
+        margin: 32px auto;
         background-color: #fff;
         padding: 20px;
         border-radius: 8px;
@@ -102,9 +102,15 @@
         margin-bottom: 20px;
     }
     form{
-        max-width:max-content
+        max-width:max-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 32px auto;
     }
     .form-group {
+        margin: auto;
         margin-bottom: 15px;
     }
     label {
