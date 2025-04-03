@@ -1,3 +1,7 @@
+import { mount } from 'svelte';
+import Header from '../lib/Header.svelte';
+import Footer from '../lib/Footer.svelte';
+
 // retrieve data from localstorage
 export function getLocalStorage(key) {
     const data = localStorage.getItem(key);
@@ -19,7 +23,6 @@ export function setLocalStorage(key, data) {
 localStorage.setItem(key, JSON.stringify(data));
 }
 
-
 export function updateCatergoryList(category) {
 
   let categoriesList = getLocalStorage('categories')
@@ -37,3 +40,16 @@ export function updateCatergoryList(category) {
   
   setLocalStorage('categories', categoriesList)
 }
+
+export function renderHeaderFooter(){
+  //something that will render our header and footer from svelte 
+  const header = mount(Header, {
+    target: document.querySelector('#header'),
+  });
+
+  const footer = mount(Footer, {
+    target: document.querySelector('#footer'),
+  });
+
+};
+
