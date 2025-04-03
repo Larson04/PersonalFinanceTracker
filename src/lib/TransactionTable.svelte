@@ -33,11 +33,11 @@
         <caption>{month}</caption>
         <thead>
             <tr>
-                <th style="width: 20%" class:income={income_expense === "income"} 
+                <th style="width: 25%" class:income={income_expense === "income"} 
                 class:expense={income_expense === "expense"}>
                     Date
                 </th>
-                <th style="width: 50%" class:income={income_expense === "income"} 
+                <th style="width: 45%" class:income={income_expense === "income"} 
                 class:expense={income_expense === "expense"}>
                     Description
                 </th>
@@ -91,9 +91,6 @@
         padding: 8px;
         text-align: left;
         border-bottom: 1px solid #ddd;
-    }
-    .description{
-        width: 60%;
     }
 
     th {
