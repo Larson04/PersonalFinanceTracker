@@ -2,23 +2,18 @@
     import TransactionEntry from "./TransactionEntry.svelte"
     import { getLocalStorage } from '../js/utils.js';
 
-    // let { month, income_expense} = $props();
-    let month = 'March';
-    let income_expense = 'expense';
-
+    let { month, income_expense} = $props();
+    
 
     let entries = [];
 
     entries = getLocalStorage(income_expense);
 
     let sortedEntries = [...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    
-
-
+    let filteredEntries = sortedEntries.filter(entry => entry.month === month);
 </script>
 
-<h2>History</h2>
+
 <div class="container">
     <table>
         <caption>{month}</caption>
@@ -31,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            {#each sortedEntries as entry}
+            {#each filteredEntries as entry}
                 <TransactionEntry entry={entry} />
             {/each}
         </tbody>
@@ -52,6 +47,8 @@
         max-width: 65%;
         padding: 4px 0px 8px 0px;
         margin: auto;
+        margin-top: 8px;
+
     }
     
     table {
