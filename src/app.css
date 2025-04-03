@@ -7,7 +7,6 @@ body {
   font-family: sans-serif;
 }
 
-
 .listings{
   display: flex;
   flex-direction: row;
@@ -16,5 +15,13 @@ body {
 }
 
 .income, .expense{
-  width: 100%;
+  width: 50%;
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 0;
+  align-items: center;
+  background: #ffffff;
+
 }
