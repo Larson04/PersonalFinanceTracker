@@ -35,6 +35,7 @@ export function updateCatergoryList(category) {
   } // Check if the category is already on the list 
   else if (!categoriesList.includes(category)){
 
+    // @ts-ignore
     categoriesList.push(category);
   }
   
