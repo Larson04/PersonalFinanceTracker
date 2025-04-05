@@ -24,14 +24,39 @@
 </div>
 
 <style>
-    .listings{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
+  .listings{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
 
-    .income, .expense {
-        width: 50%;
-    }
+  .income-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .listings h2 {
+    text-align: center;
+    font-size: 32px;
+  }
+
+  .income, .expense {
+    width: 50%;
+  }
+
+  .listings h3 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 0px;
+  }
+
+  .listings hr {
+    width: 25%;
+    margin-bottom: 24px;
+    border: 2px solid black;
+    border-radius: 4px;
+  }
 
 </style>
