@@ -14,7 +14,7 @@
             <GoalDisplay goal={goal} key={index} />
         {/each}
     {:else}
-        <p>No goals available.</p>
+        <p>No spending goals available.</p>
     {/if}
 
 </div>

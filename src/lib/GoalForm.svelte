@@ -54,7 +54,7 @@
 </script>
 
 <div class="container show goal">
-    <h2>Set your spending goal</h2>
+    <h2>Set Your Spending Goal</h2>
     <form on:submit={submitHandler}>
         <div class="form-group">
             <label for="category">Category:</label>
