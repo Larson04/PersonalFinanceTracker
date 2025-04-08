@@ -5,7 +5,9 @@
   import GoalDisplay from './lib/GoalDisplay.svelte';
   import { getLocalStorage } from './js/utils.js';
   import GoalList from './lib/GoalList.svelte';
-  
+  import TransactionEntry from './lib/TransactionEntry.svelte';
+  import TableContainer from './lib/TableContainer.svelte';
+
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 
   'July', 'August', 'September', 'October', 'November', 'December'];
   
@@ -20,33 +22,16 @@
   <div class="hero">
     <Hero />
   </div>
-  <div class="main"></div>
-  <div>
+  <div class="main">
+
     <GoalList />
-  </div>
-  <div class="listings">
-    <h2>History</h2>
-    <div class="income-container">
-      <div class="income">
-        <h3>Income</h3>
-        <hr>
-        {#each  months as month}
-          <TransactionTable month={month} income_expense={'income'} />
-          {/each}
-      </div>
-      <div class="expense">
-        <h3>Expense</h3>
-        <hr>
-        {#each  months as month}
-          <TransactionTable month={month} income_expense={'expense'} />
-          {/each}
-      </div>
+    <TableContainer />
+
+    <div id="inputForm">
+      <InputForm />
     </div>
   </div>
 
-  <div id="inputForm">
-    <InputForm />
-  </div>
 
 </main>
 

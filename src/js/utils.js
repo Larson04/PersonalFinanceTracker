@@ -41,6 +41,24 @@ export function updateCatergoryList(category) {
   
   setLocalStorage('categories', categoriesList)
 }
+export function updateGoalList(goal) {
+
+  let goalsList = getLocalStorage('goals')
+  
+  // Verify that the list exists in local storage
+  if (goalsList == null){
+
+    goalsList = [goal]
+
+  } // Check if the goal is already on the list 
+  else if (!goalsList.includes(goal)){
+
+    // @ts-ignore
+    goalsList.push(goal);
+  }
+  
+  setLocalStorage('goals', goalsList)
+}
 
 export function renderHeaderFooter(){
   //something that will render our header and footer from svelte 
