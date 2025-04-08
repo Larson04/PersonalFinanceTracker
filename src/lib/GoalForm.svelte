@@ -49,7 +49,7 @@
 
 
         closeGoalModal();
-        // location.reload()
+        location.reload()
     }
 </script>
 
