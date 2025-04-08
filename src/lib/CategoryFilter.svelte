@@ -17,8 +17,6 @@
             <CaregoryButton category={category} />
         {/each}
     </div>
-    <button>Show all</button>
-
 </form>
 
 
