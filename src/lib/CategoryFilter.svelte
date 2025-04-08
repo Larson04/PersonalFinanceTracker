@@ -55,10 +55,6 @@ form {
     width: 100%;
 }
 
-button {
-    margin-top: 16px;
-}
-
 hr {
     width: 25%;
     margin-bottom: 8px;
