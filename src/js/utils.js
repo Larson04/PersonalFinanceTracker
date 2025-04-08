@@ -41,7 +41,7 @@ export function updateCatergoryList(category) {
   
   setLocalStorage('categories', categoriesList)
 }
-export function updateGoalList(goalObject) {
+export function addGoalToList(goalObject) {
 
   let goalsList = getLocalStorage('goals')
   
@@ -58,6 +58,21 @@ export function updateGoalList(goalObject) {
   }
   
   setLocalStorage('goals', goalsList)
+}
+
+export function updateGoalExpense(category, amount){
+
+  let goalsList = getLocalStorage('goals')
+
+
+  goalsList.forEach((goal) => {
+    if (goal["category"] === category){
+      goal["currentExpense"] += amount
+    }
+  })
+  
+  setLocalStorage('goals', goalsList)
+
 }
 
 export function renderHeaderFooter(){

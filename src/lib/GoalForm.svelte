@@ -1,5 +1,5 @@
 <script>
-    import { getLocalStorage, setLocalStorage, updateGoalList } from "../js/utils";
+    import { getLocalStorage, setLocalStorage, addGoalToList } from "../js/utils";
     import {closeGoalModal} from "../js/modal.mjs"
 
     let categoriesList = getLocalStorage("categories") || [];
@@ -32,7 +32,7 @@
             income_expense: allowedExpense
         };
 
-        updateGoalList(goalObject);
+        addGoalToList(goalObject);
 
         // Add new category to list and localStorage if it's new
         if (useCustomCategory && newCategory && !categoriesList.includes(newCategory)) {

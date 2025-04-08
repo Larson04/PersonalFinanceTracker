@@ -1,5 +1,5 @@
 <script>
-    import { getLocalStorage, setLocalStorage, updateCatergoryList } from "../js/utils";
+    import { getLocalStorage, setLocalStorage, updateCatergoryList, updateGoalExpense } from "../js/utils";
     import { closeModal } from "../js/modal.mjs";
 
     let description = "";
@@ -51,6 +51,8 @@
             setLocalStorage("categories", categoriesList);
             updateCatergoryList(newCategory); // optional utility
         }
+
+        if( key == "expense") {updateGoalExpense(category, amount)}
 
         document.getElementsByTagName("form")[0].reset();
         category = "";
