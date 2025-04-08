@@ -3,56 +3,41 @@
   export let key;
 
   import { onMount } from "svelte";
+  import { tweened } from "svelte/motion";
+  import { cubicOut } from "svelte/easing";
 
-  let goalPercentage = 0;
+  let goalPercentage = tweened(0, { duration: 2000, easing: cubicOut }); // Smooth transition
   let category = "";
   let currentExpense = 0;
 
-  function setCSSAnimation(goal) {
-    const styleSheet = document.styleSheets[1];
-
-    // Create the new keyframes rule dynamically
-    const keyframesRule = `
-      @keyframes progress {
-        from {
-          --goal: 0%;
-        }
-        to {
-          --goal: ${goal}%;
-        }
-      }
-    `;
-    
-    // Inject the new keyframes rule
-    styleSheet.insertRule(keyframesRule, styleSheet.cssRules.length);
-  }
-
   function getTotalPercentage(goal) {
-    const monthlyBudget = goal['allowedExpense'];
-    const budgetPercentage = 100;
-    return (goal['currentExpense'] * budgetPercentage) / monthlyBudget;
+    const monthlyBudget = goal["allowedExpense"];
+    return (goal["currentExpense"] * 100) / monthlyBudget;
   }
 
   function formatCategory(category) {
     return category
-      .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space before uppercase letters
-      .split(' ') // Split into words
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
-      .join(' '); // Join words with a space
+      .replace(/([a-z])([A-Z])/g, "$1 $2") // Add space before uppercase letters
+      .split(" ") // Split into words
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+      .join(" "); // Join words with a space
   }
 
   onMount(() => {
-    goalPercentage = getTotalPercentage(goal);
-    setCSSAnimation(goalPercentage); // Call setCSSAnimation after goalPercentage is defined
-    category = formatCategory(goal['category']);
-    currentExpense = goal['currentExpense'];
+    category = formatCategory(goal["category"]);
+    currentExpense = goal["currentExpense"];
+    goalPercentage.set(getTotalPercentage(goal)); // Start animation
   });
 </script>
 
 <div class="circleContainer">
   <div
     class="circle"
-    style="--goal: {goalPercentage}%"
+    style="background: 
+      { $goalPercentage > 0 
+        ? `conic-gradient(at center, rgb(57, 174, 57) 0% ${$goalPercentage}%, rgb(220, 217, 217) ${$goalPercentage}% 100%)`
+        : `conic-gradient(at center, rgb(220, 217, 217) 0% 100%)` 
+      }"
   ></div>
   <div class="textWrapper">
     <p class="category">{category}</p>
@@ -61,22 +46,7 @@
 </div>
 
 <style>
-@property --goal {
-  syntax: "<percentage>";
-  inherits: true;
-  initial-value: 0%;
-}
-
 .circle {
-  --goal: 0%; 
-  background: conic-gradient(
-    at center,
-    rgb(57, 174, 57) var(--goal),
-    calc(var(--goal)),
-    red calc(var(--goal)),
-    rgb(220, 217, 217) calc(var(--goal))
-  );
-  animation: progress 2s linear 1 forwards;
   border-radius: 50%;
   mask: radial-gradient(circle at center, transparent 55%, black 55%);
   position: absolute;

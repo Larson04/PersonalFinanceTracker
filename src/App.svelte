@@ -26,15 +26,21 @@
   </div>
   <div class="listings">
     <h2>History</h2>
-    <div class="income">
-      {#each  months as month}
-        <TransactionTable month={month} income_expense={'income'} />
-        {/each}
-    </div>
-    <div class="expense">
-      {#each  months as month}
-        <TransactionTable month={month} income_expense={'expense'} />
-        {/each}
+    <div class="income-container">
+      <div class="income">
+        <h3>Income</h3>
+        <hr>
+        {#each  months as month}
+          <TransactionTable month={month} income_expense={'income'} />
+          {/each}
+      </div>
+      <div class="expense">
+        <h3>Expense</h3>
+        <hr>
+        {#each  months as month}
+          <TransactionTable month={month} income_expense={'expense'} />
+          {/each}
+      </div>
     </div>
   </div>
 
