@@ -41,20 +41,20 @@ export function updateCatergoryList(category) {
   
   setLocalStorage('categories', categoriesList)
 }
-export function updateGoalList(goal) {
+export function updateGoalList(goalObject) {
 
   let goalsList = getLocalStorage('goals')
   
   // Verify that the list exists in local storage
   if (goalsList == null){
 
-    goalsList = [goal]
+    goalsList = [goalObject]
 
   } // Check if the goal is already on the list 
-  else if (!goalsList.includes(goal)){
+  else if (!goalsList.some(goal => goal['category'] === goalObject['category'])){
 
     // @ts-ignore
-    goalsList.push(goal);
+    goalsList.push(goalObject);
   }
   
   setLocalStorage('goals', goalsList)
