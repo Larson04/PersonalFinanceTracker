@@ -11,7 +11,8 @@
     const formattedCategory = formatCategory(category)
 
     function handleClick(e){
-        console.log(e.source)
+        // get the inner text of the given element
+        console.log(e.target.value);
     }
 
 </script>

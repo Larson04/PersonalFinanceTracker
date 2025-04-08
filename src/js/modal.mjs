@@ -17,3 +17,16 @@ export function closeModal() {
         inputForm.style.display=('none');
     })
 }
+export function openGoalModal() {
+    const goalForm = document.querySelector(".goal");
+
+    goalForm.style.display=('flex');
+
+}
+
+export function closeGoalModal() {
+    const goalForm = document.querySelector(".goal");
+
+    goalForm.style.display=('none');
+
+}
