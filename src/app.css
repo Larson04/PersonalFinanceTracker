@@ -58,8 +58,8 @@ body {
   position: fixed; 
   z-index: 1; 
   left: 25%;
-  top: 0px;
+  top: 0;
   width: 100%; 
-  max-height: auto; 
+  max-height: 90%; 
   overflow: auto;  
 }
