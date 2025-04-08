@@ -41,7 +41,7 @@
   ></div>
   <div class="textWrapper">
     <p class="category">{category}</p>
-    <span class="totalProgress">${currentExpense}</span>
+    <span class="totalProgress">${(currentExpense)?currentExpense:0}</span>
   </div>
 </div>
 

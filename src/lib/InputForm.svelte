@@ -1,55 +1,69 @@
 <script>
-
     import { getLocalStorage, setLocalStorage, updateCatergoryList } from "../js/utils";
     import { closeModal } from "../js/modal.mjs";
-    let description
-    let category
-    let income_expense
-    let amount
-    let date
-    let month
 
-    function submitHandler(e) {
-        // e.preventDefault();
+    let description = "";
+    let category = "";
+    let income_expense = "";
+    let amount = "";
+    let date = "";
+    let month = "";
 
-        // Create an object to store the new transaction
-        let transactionObject = {
-            "description": description, 
-            "category": category.toLowerCase(),
-            "income_expense": income_expense,
-            "amount": amount,
-            "date": date,
-            "month": month.toLowerCase()
-        }
+    let categoriesList = getLocalStorage("categories") || [];
+    let newCategory = "";
+    let useCustomCategory = false;
 
-        // The "KEY" may vary depending on the form's input
-        let key = (income_expense === "income") ? "income" : "expense"
-
-        // Retrieve evertything that we have currently stored
-        let transactions = getLocalStorage(key);
-
-        // We are expecting the LocalStorage variable to look like so:
-        // {"expenses": [ {"description": description, "category": category, ...},{...} ]}
-
-        // Add new transaction
-        // @ts-ignore
-        transactions.push(transactionObject);
-        
-        // Send updated list to Local Storage
-        setLocalStorage(key, transactions)
-
-        // Update the categories list
-        updateCatergoryList(category.toLowerCase())
-        
-        // Reset the form 
-        document.getElementsByTagName('form')[0].reset()
-
-        // Close the modal
-        closeModal()
+    function formatCategory(category) {
+        return category
+            .replace(/([a-z])([A-Z])/g, "$1 $2")
+            .split(" ")
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
     }
 
+    function handleCategoryChange(e) {
+        category = e.target.value;
+        useCustomCategory = category === "custom";
+    }
 
+    function submitHandler(e) {
+        e.preventDefault();
 
+        const selectedCategory = useCustomCategory ? newCategory.toLowerCase() : category.toLowerCase();
+
+        let transactionObject = {
+            description,
+            category: selectedCategory,
+            income_expense,
+            amount,
+            date,
+            month: month.toLowerCase()
+        };
+
+        let key = (income_expense === "income") ? "income" : "expense";
+        let transactions = getLocalStorage(key) || [];
+        transactions.push(transactionObject);
+        setLocalStorage(key, transactions);
+
+        // Save new category if needed
+        if (useCustomCategory && newCategory && !categoriesList.includes(newCategory)) {
+            categoriesList = [...categoriesList, newCategory];
+            setLocalStorage("categories", categoriesList);
+            updateCatergoryList(newCategory); // optional utility
+        }
+
+        document.getElementsByTagName("form")[0].reset();
+        category = "";
+        newCategory = "";
+        income_expense = "";
+        amount = "";
+        date = "";
+        month = "";
+        useCustomCategory = false;
+
+        closeModal();
+        location.reload()
+    }
 </script>
 
 <div class="container show">
@@ -57,17 +71,37 @@
     <form onsubmit={submitHandler}>
         <div class="form-group">
             <label for="description">Description:</label>
-            <input type="text" id="description" name="description" bind:value={description} required>
+            <input type="text" id="description" bind:value={description} required placeholder="Brief Description"/>
         </div>
 
         <div class="form-group">
             <label for="category">Category:</label>
-            <input type="text" id="category" name="category" bind:value={category} required>
+            <select id="category" bind:value={category} onchange={handleCategoryChange} required>
+                <option value="" disabled selected>Select a category</option>
+                {#each categoriesList as cat}
+                    <option value={cat}>{formatCategory(cat)}</option>
+                {/each}
+                <option value="custom">+ Add new category</option>
+            </select>
         </div>
+
+        {#if useCustomCategory}
+            <div class="form-group">
+                <label for="newCategory">New Category:</label>
+                <input
+                    type="text"
+                    id="newCategory"
+                    bind:value={newCategory}
+                    placeholder="Enter new category"
+                    required
+                />
+            </div>
+        {/if}
 
         <div class="form-group">
             <label for="income_expense">Income or Expense:</label>
-            <select id="income_expense" name="income_expense" bind:value={income_expense} required>
+            <select id="income_expense" bind:value={income_expense} required>
+                <option value="" disabled selected>Select one</option>
                 <option value="income">Income</option>
                 <option value="expense">Expense</option>
             </select>
@@ -75,17 +109,31 @@
 
         <div class="form-group">
             <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" bind:value={amount} required step="0.50" min="0">
+            <input type="number" id="amount" bind:value={amount} step="0.50" min="0" required placeholder="0.0" />
         </div>
 
         <div class="form-group">
             <label for="date">Date:</label>
-            <input type="date" id="date" name="date" bind:value={date} required>
+            <input type="date" id="date" bind:value={date} required placeholder="MM/DD/YYYY"/>
         </div>
 
         <div class="form-group">
             <label for="month">Month:</label>
-            <input type="text" id="month" name="month" bind:value={month} required>
+            <select id="month" bind:value={month} required>
+                <option value="" disabled selected>Select month</option>
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+            </select>
         </div>
 
         <button id="submit-button" type="submit" onclick={closeModal}>Submit</button>
@@ -93,7 +141,6 @@
 </div>
 
 <style>
-
     .container {
         max-width: 600px;
         margin: 32px auto;
@@ -102,34 +149,42 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
+
     h2 {
         text-align: center;
         margin-bottom: 20px;
     }
-    form{
-        max-width:max-content;
+
+    form {
+        max-width: max-content;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         margin: 32px auto;
     }
+
     .form-group {
         margin: auto;
         margin-bottom: 15px;
+        width: 100%;
     }
+
     label {
         display: block;
         margin-bottom: 5px;
         font-weight: bold;
     }
-    input, select {
+
+    input,
+    select {
         width: 34em;
         padding: 8px;
         margin: 5px 0;
         border-radius: 4px;
         border: 1px solid #ccc;
     }
+
     button {
         width: 100%;
         padding: 10px;
@@ -139,9 +194,11 @@
         border-radius: 4px;
         font-size: 16px;
     }
+
     button:hover {
         background-color: #45a049;
     }
+
     button:active {
         scale: 90%;
     }
