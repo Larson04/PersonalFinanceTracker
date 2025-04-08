@@ -42,6 +42,9 @@
         
         // Reset the form 
         document.getElementsByTagName('form')[0].reset()
+
+        // Close the modal
+        closeModal()
     }
 
 
