@@ -18,8 +18,8 @@
 </div>
 
 <div class="buttons">
-    <button id="entry-button" onclick={openModal}>New Entry</button>
     <button id="goal-button" onclick={openGoalModal}>New Goal</button>
+    <button id="entry-button" onclick={openModal}>New Entry</button>
     <button>Import</button>
     <button>Export</button>
 </div>
