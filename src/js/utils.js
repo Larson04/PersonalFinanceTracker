@@ -60,19 +60,16 @@ export function addGoalToList(goalObject) {
   setLocalStorage('goals', goalsList)
 }
 
-export function updateGoalExpense(category, amount){
-
-  let goalsList = getLocalStorage('goals')
-
+export function updateGoalExpense(category, amount) {
+  let goalsList = getLocalStorage('goals') || [];
 
   goalsList.forEach((goal) => {
-    if (goal["category"] === category){
-      goal["currentExpense"] += amount
+    if (goal.category.toLowerCase() === category.toLowerCase()) {
+      goal.currentExpense = (parseFloat(goal.currentExpense) || 0) + parseFloat(amount);
     }
-  })
-  
-  setLocalStorage('goals', goalsList)
+  });
 
+  setLocalStorage('goals', goalsList);
 }
 
 export function renderHeaderFooter(){
