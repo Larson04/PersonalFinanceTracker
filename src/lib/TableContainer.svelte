@@ -8,9 +8,11 @@
 
 </script>
 
-<h2>History</h2>
 <CategotyFilter />
 <div class="listings">
+  <h2>History</h2>
+  <hr>
+  <div class="income-container">
     <div class="income">
         {#each  months as month}
           <TransactionTable month={month} income_expense={'income'} />
@@ -21,12 +23,14 @@
           <TransactionTable month={month} income_expense={'expense'} />
           {/each}
       </div>
+  </div>
 </div>
 
 <style>
   .listings{
     display: flex;
     flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     margin-bottom: 24px;
   }
@@ -40,16 +44,11 @@
   .listings h2 {
     text-align: center;
     font-size: 32px;
+    margin-bottom: 0px;
   }
 
   .income, .expense {
     width: 50%;
-  }
-
-  .listings h3 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 0px;
   }
 
   .listings hr {

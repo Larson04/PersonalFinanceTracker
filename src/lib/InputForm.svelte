@@ -42,6 +42,7 @@
 
         let key = (income_expense === "income") ? "income" : "expense";
         let transactions = getLocalStorage(key) || [];
+        // @ts-ignore
         transactions.push(transactionObject);
         setLocalStorage(key, transactions);
 
