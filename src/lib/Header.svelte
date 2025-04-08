@@ -1,11 +1,24 @@
+<script>
+    import { openModal } from '../js/modal.mjs';
+    import InputForm from './InputForm.svelte';
 
+    setTimeout(() => {
+        const inputForm = document.querySelector(".show");
+        const entryButton = document.getElementById("entry-button");
+
+        entryButton.addEventListener("click", () => {
+            inputForm.style.display = "flex";
+        })
+    }, 20);
+
+</script>
 
 <div class="logo">
     <img src="src/assets/pft-icon.png" alt="personal finance tracker logo">
 </div>
 
 <div class="buttons">
-    <button id="entry-button">New Entry</button>
+    <button id="entry-button" onclick={openModal}>New Entry</button>
     <button>Import</button>
     <button>Export</button>
 </div>
