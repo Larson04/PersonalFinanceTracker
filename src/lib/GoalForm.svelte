@@ -1,5 +1,6 @@
 <script>
     import { getLocalStorage, setLocalStorage, updateGoalList } from "../js/utils";
+    import {closeGoalModal} from "../js/modal.mjs"
 
     let categoriesList = getLocalStorage("categories") || [];
 
@@ -45,10 +46,14 @@
         newCategory = "";
         allowedExpense = "";
         useCustomCategory = false;
+
+
+        closeGoalModal();
+        // location.reload()
     }
 </script>
 
-<div class="container">
+<div class="container show goal">
     <h2>Set your spending goal</h2>
     <form on:submit={submitHandler}>
         <div class="form-group">
@@ -87,6 +92,8 @@
 
 <style>
     .container {
+        border-color: rgb(34, 34, 145);;
+        border-style: solid;
         max-width: 600px;
         margin: 32px auto;
         background-color: #fff;

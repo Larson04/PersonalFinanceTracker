@@ -142,6 +142,8 @@
 
 <style>
     .container {
+        border-color: rgb(34, 34, 145);;
+        border-style: solid;
         max-width: 600px;
         margin: 32px auto;
         background-color: #fff;

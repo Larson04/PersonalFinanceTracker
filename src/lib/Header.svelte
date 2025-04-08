@@ -1,5 +1,5 @@
 <script>
-    import { openModal } from '../js/modal.mjs';
+    import { openModal, openGoalModal } from '../js/modal.mjs';
     import InputForm from './InputForm.svelte';
 
     setTimeout(() => {
@@ -19,6 +19,7 @@
 
 <div class="buttons">
     <button id="entry-button" onclick={openModal}>New Entry</button>
+    <button id="goal-button" onclick={openGoalModal}>New Goal</button>
     <button>Import</button>
     <button>Export</button>
 </div>
@@ -50,11 +51,11 @@
     .buttons button:active {
         scale: 90%;
     }
-    #entry-button {
-        margin-right: 64px;
+    #entry-button, #goal-button {
+        /* margin-right: 64px; */
         background: #99BC85;
     }
-    #entry-button:hover {
+    #entry-button:hover , #goal-button:hover{
         background: #85a373;
     }
 </style>
