@@ -20,4 +20,8 @@
         padding: 0px 0px 0px 4px;
     }
 
+    td{
+        padding: 0px 0px 0px 4px;
+    }
+
 </style>

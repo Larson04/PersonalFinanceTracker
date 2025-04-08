@@ -4,13 +4,18 @@
 
     let { month, income_expense} = $props();
     
+    let category = '';
 
     let entries = [];
+    let displayEntries = [];
 
     entries = getLocalStorage(income_expense);
 
     let sortedEntries = [...entries].sort((a, b) => new Date(b.date) - new Date(a.date));
-    let filteredEntries = sortedEntries.filter(entry => entry.month === month);
+    let filteredEntries = sortedEntries.filter(entry => entry.month === month.toLowerCase());
+
+    displayEntries = filteredEntries;
+
 </script>
 
 
@@ -19,14 +24,26 @@
         <caption>{month}</caption>
         <thead>
             <tr>
-                <th class:income={income_expense === "income"} class:expense={income_expense === "expense"}>Date</th>
-                <th class:income={income_expense === "income"} class:expense={income_expense === "expense"}>Description</th>
-                <th class:income={income_expense === "income"} class:expense={income_expense === "expense"}>Category</th>
-                <th class:income={income_expense === "income"} class:expense={income_expense === "expense"}>Amount</th>
+                <th style="width: 25%" class:income={income_expense === "income"} 
+                class:expense={income_expense === "expense"}>
+                    Date
+                </th>
+                <th style="width: 45%" class:income={income_expense === "income"} 
+                class:expense={income_expense === "expense"}>
+                    Description
+                </th>
+                <th style="width: 15%" class:income={income_expense === "income"} 
+                class:expense={income_expense === "expense"}>
+                    Category
+                </th>
+                <th style="width: 5%" class:income={income_expense === "income"} 
+                class:expense={income_expense === "expense"}>
+                    Amount
+                </th>
             </tr>
         </thead>
         <tbody>
-            {#each filteredEntries as entry}
+            {#each displayEntries as entry}
                 <TransactionEntry entry={entry} />
             {/each}
         </tbody>
@@ -34,9 +51,6 @@
 </div>
 
 <style>
-    h2 {
-        text-align: center;
-    }
 
     .container {
         border: 2px solid #2C3E50;
@@ -44,7 +58,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        max-width: 65%;
+        max-width: 80%;
         padding: 4px 0px 8px 0px;
         margin: auto;
         margin-top: 8px;
@@ -63,7 +77,8 @@
         text-align: center;
     }
     
-    th, td {
+    th {
+        margin: 8px;
         padding: 8px;
         text-align: left;
         border-bottom: 1px solid #ddd;
