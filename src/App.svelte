@@ -7,6 +7,7 @@
   import GoalList from './lib/GoalList.svelte';
   import TransactionEntry from './lib/TransactionEntry.svelte';
   import TableContainer from './lib/TableContainer.svelte';
+  import GoalForm from './lib/GoalForm.svelte';
 
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 
   'July', 'August', 'September', 'October', 'November', 'December'];
@@ -29,6 +30,10 @@
 
     <div id="inputForm">
       <InputForm />
+    </div>
+
+    <div id="goalForm">
+      <GoalForm />
     </div>
   </div>
 

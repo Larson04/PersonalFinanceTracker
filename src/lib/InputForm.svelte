@@ -71,7 +71,7 @@
 
         <div class="form-group">
             <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" bind:value={amount} required step="0.01" min="0">
+            <input type="number" id="amount" name="amount" bind:value={amount} required step="0.50" min="0">
         </div>
 
         <div class="form-group">

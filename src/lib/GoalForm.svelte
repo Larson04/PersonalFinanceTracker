@@ -1,44 +1,33 @@
 <script>
 
-    import { getLocalStorage, setLocalStorage, updateCatergoryList } from "../js/utils";
-    let description
+    import { getLocalStorage, setLocalStorage, updateCatergoryList, updateGoalList } from "../js/utils";
+
+    let categoriesList = getLocalStorage("categories")
+
+    function formatCategory(category) {
+    return category
+        .replace(/([a-z])([A-Z])/g, "$1 $2")
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+}
     let category
-    let income_expense
-    let amount
-    let date
-    let month
+    let allowedExpense
 
     function submitHandler(e) {
         e.preventDefault()
 
-        // Create an object to store the new transaction
-        let transactionObject = {
-            "description": description, 
+        // Create an object to store the new goal
+        let goalObject = {
             "category": category,
-            "income_expense": income_expense,
-            "amount": amount,
-            "date": date,
-            "month": month
+            "income_expense": allowedExpense
         }
 
-        // The "KEY" may vary depending on the form's input
-        let key = (income_expense === "income") ? "income" : "expense"
-
-        // Retrieve evertything that we have currently stored
-        let transactions = getLocalStorage(key);
-
         // We are expecting the LocalStorage variable to look like so:
-        // {"expenses": [ {"description": description, "category": category, ...},{...} ]}
+        // {"goals": [ {"category": category, "income_expense": income_expense, ...},{...} ]}
 
-        // Add new transaction
-        // @ts-ignore
-        transactions.push(transactionObject);
-        
-        // Send updated list to Local Storage
-        setLocalStorage(key, transactions)
-
-        // Update the categories list
-        updateCatergoryList(category.toLowerCase())
+        // Update the goal list
+        updateGoalList(goalObject)
         
         // Reset the form 
         document.getElementsByTagName('form')[0].reset()
@@ -49,42 +38,25 @@
 </script>
 
 <div class="container">
-    <h2>Income/Expense Tracker</h2>
+    <h2>Set you spending goal</h2>
     <form onsubmit={submitHandler}>
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <input type="text" id="description" name="description" bind:value={description} required>
-        </div>
 
         <div class="form-group">
             <label for="category">Category:</label>
-            <input type="text" id="category" name="category" bind:value={category} required>
-        </div>
-
-        <div class="form-group">
-            <label for="income_expense">Income or Expense:</label>
-            <select id="income_expense" name="income_expense" bind:value={income_expense} required>
-                <option value="income">Income</option>
-                <option value="expense">Expense</option>
+            <select id="category" name="category" bind:value={category} required>
+                <option value="" disabled selected>Select a category</option>
+                {#each categoriesList as cat}
+                    <option value={cat}>{formatCategory(cat)}</option>
+                {/each}
             </select>
         </div>
 
         <div class="form-group">
-            <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" bind:value={amount} required step="0.01" min="0">
+            <label for="allowedExpense">Amount:</label>
+            <input type="number" id="allowedExpense" name="allowedExpense" bind:value={allowedExpense} required step="0.50" min="0">
         </div>
 
-        <div class="form-group">
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" bind:value={date} required>
-        </div>
-
-        <div class="form-group">
-            <label for="month">Month:</label>
-            <input type="text" id="month" name="month" bind:value={month} required>
-        </div>
-
-        <button type="submit">Submit</button>
+        <button type="submit">Save</button>
     </form>
 </div>
 
