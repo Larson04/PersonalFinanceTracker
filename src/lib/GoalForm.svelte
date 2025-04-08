@@ -29,7 +29,7 @@
 
         let goalObject = {
             category: selectedCategory,
-            income_expense: allowedExpense
+            allowedExpense: allowedExpense
         };
 
         addGoalToList(goalObject);

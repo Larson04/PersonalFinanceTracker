@@ -1,6 +1,7 @@
 <script>
     import CaregoryButton from './CategoryButton.svelte'
     import {getLocalStorage, updateCatergoryList} from "../js/utils"
+  import CategoryButton from './CategoryButton.svelte';
     let categories = getLocalStorage('categories')
 
 </script>
@@ -11,6 +12,7 @@
     <h3>Categories</h3>
     <p>Select a category to filter the tables</p>
     <div class="buttonContainer">
+        <CategoryButton category="See All"/>
         {#each categories as category}
             <CaregoryButton category={category} />
         {/each}
