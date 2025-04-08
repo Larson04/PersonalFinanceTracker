@@ -9,20 +9,31 @@
 
 <form>
     
-    <h3>Categories</h3>
+    <h2>Categories</h2>
+    <hr>
     <p>Select a category to filter the tables</p>
-    <div class="buttonContainer">
-        <CategoryButton category="See All"/>
-        {#each categories as category}
-            <CaregoryButton category={category} />
-        {/each}
+    <div class="filters">
+        <div class="buttonContainer">
+            <CategoryButton category="See All"/>
+            {#each categories as category}
+                <CaregoryButton category={category} />
+            {/each}
+        </div>
     </div>
     <button>Show all</button>
-
 </form>
 
 
 <style>
+
+h2 {
+    margin-bottom: 0px;
+    font-size: 32px;
+}
+
+p {
+    margin-bottom: 32px;
+}
 
 .buttonContainer{
     display: flex;
@@ -33,4 +44,26 @@
 
 }
 
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.filters {
+    width: 100%;
+}
+
+button {
+    margin-top: 16px;
+}
+
+hr {
+    width: 25%;
+    margin-bottom: 8px;
+    border: 2px solid black;
+    border-radius: 4px;
+}
 </style>
