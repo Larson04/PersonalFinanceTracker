@@ -18,7 +18,7 @@
 
 </script>
 
-
+{#if displayEntries.length > 0}
 <div class="container">
     <table>
         <caption>{month}</caption>
@@ -49,6 +49,7 @@
         </tbody>
     </table>
 </div>
+{/if}
 
 <style>
 
