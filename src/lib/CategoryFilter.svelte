@@ -20,7 +20,6 @@
             {/each}
         </div>
     </div>
-    <button>Show all</button>
 </form>
 
 
