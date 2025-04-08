@@ -2,12 +2,14 @@
     import { openModal } from '../js/modal.mjs';
     import InputForm from './InputForm.svelte';
 
-    const inputForm = document.querySelector(".container");
-    const entryButton = document.querySelector("#entry-button");
+    setTimeout(() => {
+        const inputForm = document.querySelector(".show");
+        const entryButton = document.getElementById("entry-button");
 
-    entryButton.addEventListener("click", () => {
-        inputForm.style.display=('flex');
-    })
+        entryButton.addEventListener("click", () => {
+            inputForm.style.display = "flex";
+        })
+    }, 20);
 
 </script>
 
